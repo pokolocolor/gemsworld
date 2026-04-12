@@ -1,0 +1,330 @@
+/* ═══════════════════════════════════════
+   editor.css — 에디터 + 갤러리 스타일
+   ═══════════════════════════════════════ */
+
+/* ─── 상단 툴바 ─── */
+#topBar {
+  background: var(--bg-card);
+  padding: 4px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  box-shadow: 0 2px 8px rgba(60, 50, 30, .08);
+  z-index: 10;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.top-row, .preset-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.top-row { gap: 4px; }
+.preset-row { gap: 3px; }
+
+/* ─── 에디터 전용 버튼 ─── */
+.t-btn {
+  padding: 4px 7px;
+  border: none;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  touch-action: manipulation;
+  transition: opacity .1s, transform .08s;
+}
+
+.t-btn:active { opacity: .7; transform: scale(.94); }
+.t-back { background: transparent; color: var(--accent); font-size: 12px; font-weight: 800; padding: 4px 5px; text-decoration: none; }
+.t-open { background: var(--primary); color: #fff; }
+.t-split { background: #e07850; color: #fff; }
+
+/* ─── 프리셋 버튼 ─── */
+.t-preset {
+  background: var(--primary-light);
+  color: var(--accent);
+  font-size: 11px;
+  padding: 4px 8px;
+  border: 2px solid transparent;
+  border-radius: 7px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .12s;
+  touch-action: manipulation;
+}
+
+.t-preset:active { opacity: .7; }
+
+.t-preset.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* ─── 숫자 컨트롤 ─── */
+.t-sm {
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 5px;
+  background: var(--border);
+  color: var(--text);
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  padding: 0;
+}
+
+.t-sm:active { background: var(--primary-light); }
+
+.t-lbl {
+  font-size: 10px;
+  color: var(--text-sub);
+  white-space: nowrap;
+}
+
+.num-ctrl {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  background: var(--bg);
+  border-radius: 6px;
+  padding: 1px 2px;
+  border: 1px solid var(--border);
+}
+
+.num-ctrl input[type=number] {
+  width: 20px;
+  padding: 1px 0;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  font-family: inherit;
+  -moz-appearance: textfield;
+}
+
+.num-ctrl input::-webkit-outer-spin-button,
+.num-ctrl input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.t-sep {
+  width: 1px;
+  height: 18px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+/* ─── 캔버스 영역 ─── */
+#canvasArea {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0ece4;
+}
+
+#mainCanvas {
+  display: block;
+  touch-action: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(245, 240, 234, .85);
+  gap: 12px;
+  pointer-events: none;
+}
+
+.overlay-icon { font-size: 48px; }
+
+.overlay-msg {
+  font-size: 14px;
+  color: var(--text-sub);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.5;
+}
+
+#statusBar {
+  background: var(--bg-card);
+  padding: 4px 10px;
+  font-size: 10px;
+  color: var(--text-sub);
+  text-align: center;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+/* ─── 갤러리 ─── */
+.gal-header {
+  background: var(--bg-card);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(60, 50, 30, .08);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.gal-title { font-size: 15px; font-weight: 800; color: var(--text); }
+
+.gal-count {
+  font-size: 12px;
+  color: var(--text-sub);
+  font-weight: 600;
+  background: var(--primary-light);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.gal-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 10px;
+}
+
+.gal-grid { display: grid; gap: 8px; }
+
+.gal-grid img {
+  width: 100%;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  transition: transform .1s, border-color .15s;
+  background: #fff;
+}
+
+.gal-grid img:active { transform: scale(.95); }
+.gal-grid img.saved { border-color: var(--primary); opacity: .75; }
+
+.gal-bottom {
+  background: var(--bg-card);
+  padding: 8px 10px calc(8px + var(--safe-bottom));
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.btn-gal {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: opacity .12s;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-gal:active { opacity: .7; }
+.btn-gal.back { background: var(--border); color: var(--text); }
+.btn-gal.home { background: var(--primary-light); color: var(--accent); }
+.btn-gal.dl   { background: var(--primary); color: #fff; }
+.btn-gal.zip  { background: var(--accent); color: #fff; }
+
+/* ─── 다운로드 프로그래스 ─── */
+#dlProgress {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  flex-direction: column;
+  gap: 14px;
+}
+
+#dlProgress.show { display: flex; }
+
+.dl-box {
+  background: var(--bg-card);
+  border-radius: 20px;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-width: 220px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, .25);
+}
+
+.dl-text { font-size: 14px; font-weight: 700; color: var(--text); }
+
+.dl-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.dl-bar {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 4px;
+  transition: width .3s;
+}
+
+/* ─── 화면 전환 ─── */
+.screen {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.screen.active { display: flex; }
+
+/* ─── 반응형 ─── */
+@media (max-width: 340px) {
+  #topBar { padding: 3px 4px; gap: 2px; }
+  .top-row { gap: 2px; }
+  .preset-row { gap: 2px; }
+  .t-btn { padding: 3px 5px; font-size: 10px; }
+  .t-back { padding: 3px 4px; font-size: 11px; }
+  .t-preset { padding: 3px 6px; font-size: 10px; }
+  .t-sm { width: 20px; height: 20px; font-size: 9px; }
+  .num-ctrl input[type=number] { width: 18px; font-size: 12px; }
+  .t-lbl { font-size: 9px; }
+}
+
+@media (min-width: 601px) {
+  #topBar { padding: 8px 14px; gap: 6px; }
+  .t-btn { padding: 8px 14px; font-size: 14px; }
+  .t-preset { padding: 6px 14px; font-size: 13px; }
+  .t-sm { width: 30px; height: 30px; font-size: 13px; }
+  .num-ctrl input[type=number] { width: 28px; font-size: 16px; }
+  .t-lbl { font-size: 12px; }
+}
