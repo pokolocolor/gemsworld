@@ -1,0 +1,63 @@
+/* ═══════════════════════════════════════
+   common.css — 공통 변수, 리셋, 버튼, 반응형
+   ═══════════════════════════════════════ */
+
+:root {
+  --bg: #f5f0ea;
+  --bg-card: #fff;
+  --text: #3a3226;
+  --text-sub: #7a7062;
+  --text-dim: #b0a898;
+  --primary: #c9a96e;
+  --primary-light: #e8d5b0;
+  --accent: #8b6b3d;
+  --border: #e0d6c8;
+  --shadow: 0 4px 20px rgba(60, 50, 30, .10);
+  --radius: 18px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "맑은 고딕", "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ─── 공통 버튼 ─── */
+.btn {
+  padding: 7px 12px;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity .12s, transform .08s;
+  touch-action: manipulation;
+}
+
+.btn:active {
+  opacity: .7;
+  transform: scale(.94);
+}
+
+/* ─── 공통 유틸 ─── */
+.hidden { display: none !important; }
