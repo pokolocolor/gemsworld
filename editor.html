@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#f5f0ea">
+  <title>이모티콘 자르기 — 젬 있는 세상</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+
+  <!-- ═══════ 에디터 ═══════ -->
+  <div id="screen-editor" class="screen active">
+    <div id="topBar">
+      <div class="top-row">
+        <a class="t-btn t-back" href="index.html">←홈</a>
+        <button class="t-btn t-open" onclick="openImage()">📂열기</button>
+        <div class="t-sep"></div>
+        <span class="t-lbl">열</span>
+        <div class="num-ctrl">
+          <button class="t-sm" onclick="adjustVal('cols',-1)">◀</button>
+          <input type="number" id="cols" value="4" min="1" max="20" inputmode="numeric">
+          <button class="t-sm" onclick="adjustVal('cols',1)">▶</button>
+        </div>
+        <span class="t-lbl">행</span>
+        <div class="num-ctrl">
+          <button class="t-sm" onclick="adjustVal('rows',-1)">◀</button>
+          <input type="number" id="rows" value="5" min="1" max="20" inputmode="numeric">
+          <button class="t-sm" onclick="adjustVal('rows',1)">▶</button>
+        </div>
+        <div class="t-sep"></div>
+        <button class="t-btn t-split" onclick="splitImage()">✂분할</button>
+      </div>
+      <div class="preset-row">
+        <button class="t-preset" data-c="2" data-r="2" onclick="applyPreset(this)">2×2</button>
+        <button class="t-preset" data-c="2" data-r="3" onclick="applyPreset(this)">2×3</button>
+        <button class="t-preset" data-c="3" data-r="3" onclick="applyPreset(this)">3×3</button>
+        <button class="t-preset" data-c="3" data-r="4" onclick="applyPreset(this)">3×4</button>
+        <button class="t-preset active" data-c="4" data-r="5" onclick="applyPreset(this)">4×5</button>
+      </div>
+    </div>
+
+    <div id="canvasArea">
+      <canvas id="mainCanvas"></canvas>
+      <div class="overlay" id="overlay">
+        <div class="overlay-icon">🖼️</div>
+        <div class="overlay-msg">📂 열기를 눌러<br>이미지를 불러오세요</div>
+      </div>
+    </div>
+    <div id="statusBar">이미지를 불러와 주세요</div>
+  </div>
+
+  <!-- ═══════ 갤러리 ═══════ -->
+  <div id="screen-gallery" class="screen">
+    <div class="gal-header">
+      <div class="gal-title">분할 결과</div>
+      <div class="gal-count" id="saveCount">0 / 0 저장됨</div>
+    </div>
+    <div class="gal-scroll">
+      <div class="gal-grid" id="galGrid"></div>
+    </div>
+    <div class="gal-bottom">
+      <button class="btn-gal back" onclick="goScreen('screen-editor')">← 편집</button>
+      <a class="btn-gal home" href="index.html">🏠 홈</a>
+      <button class="btn-gal dl" onclick="downloadAllSeq()">💾 전체저장</button>
+      <button class="btn-gal zip" onclick="downloadZip()">📦 ZIP</button>
+    </div>
+  </div>
+
+  <!-- ═══════ 다운로드 프로그래스 ═══════ -->
+  <div id="dlProgress">
+    <div class="dl-box">
+      <div class="dl-text" id="dlText">저장 중...</div>
+      <div class="dl-bar-bg"><div class="dl-bar" id="dlBar" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="loadImage(event)">
+
+  <!-- JS 로드 순서: common → editor -->
+  <script src="js/common.js"></script>
+  <script src="js/editor.js"></script>
+
+</body>
+</html>
