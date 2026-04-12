@@ -22,9 +22,9 @@
     </div>
 
     <div class="menu-grid">
-      <a class="menu-card"
-         href="https://gemini.google.com/gem/1AJdDfAyaB1x60PV0gjAdSaeBoityoLbB?usp=sharing"
-         target="_blank" rel="noopener">
+      <a class="menu-card" href="https://gemini.google.com/gem/1AJdDfAyaB1x60PV0gjAdSaeBoityoLbB?usp=sharing"
+         target="_blank" rel="noopener"
+         onclick="return openExternal(this)">
         <div class="card-icon char">🎭</div>
         <div class="card-body">
           <div class="card-title">캐릭터 메이커</div>
@@ -33,9 +33,9 @@
         <div class="card-arrow">›</div>
       </a>
 
-      <a class="menu-card"
-         href="https://gemini.google.com/gem/1iYKFc8k1AyT5v4kTHuqPHYd1zpIp6zo9?usp=sharing"
-         target="_blank" rel="noopener">
+      <a class="menu-card" href="https://gemini.google.com/gem/1iYKFc8k1AyT5v4kTHuqPHYd1zpIp6zo9?usp=sharing"
+         target="_blank" rel="noopener"
+         onclick="return openExternal(this)">
         <div class="card-icon emoti">😊</div>
         <div class="card-body">
           <div class="card-title">이모티콘 메이커</div>
@@ -56,6 +56,19 @@
 
     <div class="footer-txt">© 젬 있는 세상 · Google Gem 공유</div>
   </div>
+
+  <script>
+  function openExternal(el) {
+    // 아이폰 웹앱(standalone) 모드 감지
+    if (window.navigator.standalone) {
+      // Safari에서 강제로 열기
+      window.location.href = el.href;
+      return false;
+    }
+    // 일반 브라우저에서는 기본 동작 (새 탭)
+    return true;
+  }
+  </script>
 
 </body>
 </html>
