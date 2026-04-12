@@ -56,11 +56,34 @@
 
   <script>
   function openGem(url) {
-    // 방법 1: window.open 시도
-    var w = window.open(url, '_blank');
-    // 방법 2: window.open이 차단된 경우 (iOS 웹앱 등)
-    if (!w || w.closed) {
-      window.location.href = url;
+    // iOS standalone(웹앱) 모드 감지
+    var isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+
+    if (isStandalone) {
+      // 웹앱 모드: 임시 a 태그로 Safari에서 강제 오픈
+      var a = document.createElement('a');
+      a.setAttribute('href', url);
+      a.setAttribute('target', '_system');
+      a.setAttribute('rel', 'noopener noreferrer');
+      a.style.display = 'none';
+      document.body.appendChild(a);
+
+      // Safari 강제 오픈 트릭
+      var evt = new MouseEvent('click', {
+        view: window,
+        bubbles: true,
+        cancelable: true
+      });
+      a.dispatchEvent(evt);
+      document.body.removeChild(a);
+
+      // 위 방법 실패 시 fallback
+      setTimeout(function() {
+        window.location.href = url;
+      }, 500);
+    } else {
+      // 일반 브라우저: 새 탭
+      window.open(url, '_blank', 'noopener,noreferrer');
     }
   }
   </script>
