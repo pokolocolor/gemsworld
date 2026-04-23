@@ -41,6 +41,15 @@
         <div class="card-arrow">›</div>
       </div>
 
+      <div class="menu-card" onclick="openGem('https://gemini.google.com/gem/1no2SQlAIt5Ia-Kv4oNQLBl986C97911n?usp=sharing')">
+        <div class="card-icon movie">🎬</div>
+        <div class="card-body">
+          <div class="card-title">무비 포스터 메이커</div>
+          <div class="card-desc">AI로 영화 포스터를 만들어 보세요</div>
+        </div>
+        <div class="card-arrow">›</div>
+      </div>
+
       <a class="menu-card" href="editor.html">
         <div class="card-icon cut">✂️</div>
         <div class="card-body">
@@ -56,11 +65,9 @@
 
   <script>
   function openGem(url) {
-    // iOS standalone(웹앱) 모드 감지
     var isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
 
     if (isStandalone) {
-      // 웹앱 모드: 임시 a 태그로 Safari에서 강제 오픈
       var a = document.createElement('a');
       a.setAttribute('href', url);
       a.setAttribute('target', '_system');
@@ -68,7 +75,6 @@
       a.style.display = 'none';
       document.body.appendChild(a);
 
-      // Safari 강제 오픈 트릭
       var evt = new MouseEvent('click', {
         view: window,
         bubbles: true,
@@ -77,12 +83,10 @@
       a.dispatchEvent(evt);
       document.body.removeChild(a);
 
-      // 위 방법 실패 시 fallback
       setTimeout(function() {
         window.location.href = url;
       }, 500);
     } else {
-      // 일반 브라우저: 새 탭
       window.open(url, '_blank', 'noopener,noreferrer');
     }
   }
